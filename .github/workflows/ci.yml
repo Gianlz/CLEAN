@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Rust checks · macOS ARM64
+    runs-on: macos-26
+    timeout-minutes: 20
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install the minimum supported Rust toolchain
+        run: |
+          rustup toolchain install 1.88.0 --profile minimal --component rustfmt,clippy
+          rustup default 1.88.0
+
+      - name: Cache Cargo data
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-${{ runner.arch }}-rust-1.88.0-${{ hashFiles('Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-rust-1.88.0-
+
+      - name: Check formatting
+        run: cargo fmt --all --check
+
+      - name: Lint with warnings denied
+        run: cargo clippy --locked --all-targets --all-features -- -D warnings
+
+      - name: Run all tests
+        run: cargo test --locked --all-targets
+
+      - name: Build the release binary
+        run: cargo build --locked --release
+
+      - name: Smoke-test read-only commands
+        run: |
+          ./target/release/clean --version
+          ./target/release/clean doctor

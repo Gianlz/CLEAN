@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish ARM64 release
+    runs-on: macos-26
+    timeout-minutes: 25
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - name: Check out the tagged source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install the release Rust toolchain
+        run: |
+          rustup toolchain install 1.88.0 --profile minimal
+          rustup default 1.88.0
+
+      - name: Cache Cargo data
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-${{ runner.arch }}-release-rust-1.88.0-${{ hashFiles('Cargo.lock') }}
+
+      - name: Validate the semantic version tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid release tag: $TAG" >&2
+            exit 1
+          fi
+          VERSION="$(cargo metadata --locked --no-deps --format-version 1 | python3 -c 'import json, sys; print(json.load(sys.stdin)["packages"][0]["version"])')"
+          if [[ "$TAG" != "v$VERSION" ]]; then
+            echo "Tag $TAG does not match Cargo.toml version $VERSION" >&2
+            exit 1
+          fi
+
+      - name: Test the tagged source
+        run: cargo test --locked --all-targets
+
+      - name: Build the optimized binary
+        run: cargo build --locked --release
+
+      - name: Package archive and checksum
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          BASENAME="clean-${TAG}-aarch64-apple-darwin"
+          PACKAGE_DIR="dist/${BASENAME}"
+          mkdir -p "$PACKAGE_DIR"
+          install -m 0755 target/release/clean "$PACKAGE_DIR/clean"
+          install -m 0644 README.md LICENSE SECURITY.md "$PACKAGE_DIR/"
+          tar -C dist -czf "dist/${BASENAME}.tar.gz" "$BASENAME"
+          rm -r "$PACKAGE_DIR"
+          (
+            cd dist
+            shasum -a 256 "${BASENAME}.tar.gz" > "${BASENAME}.tar.gz.sha256"
+          )
+
+      - name: Attest public release provenance
+        if: github.event.repository.visibility == 'public'
+        uses: actions/attest@a1948c3f048ba23858d222213b7c278aabede763 # v4.1.1
+        with:
+          subject-path: dist/*.tar.gz
+
+      - name: Create draft release with all assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" dist/*.tar.gz dist/*.sha256 \
+            --draft \
+            --generate-notes \
+            --title "CLEAN $TAG" \
+            --verify-tag
+
+      - name: Publish the complete release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release edit "$TAG" --draft=false

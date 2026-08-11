@@ -1,0 +1,64 @@
+name: Feature request
+description: Propose an improvement with its safety tradeoffs made explicit.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        CLEAN favors narrow authority and observable safety over aggressive deletion. Explain how the proposal preserves that contract.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the user problem without prescribing an implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed experience
+      description: Describe the terminal flow and observable outcome.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Scanner and cache rules
+        - Cleanup safety
+        - Terminal interface
+        - Accessibility
+        - Diagnostics and reporting
+        - Packaging and installation
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety and privacy impact
+      description: State any new paths, permissions, persistence, network access, or irreversible behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and discussions.
+          required: true
+        - label: I understand that arbitrary paths, automatic selection, and elevated deletion are outside the current safety model.
+          required: true

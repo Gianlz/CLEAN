@@ -1,0 +1,78 @@
+name: Bug report
+description: Report reproducible behavior that is unsafe, broken, or unexpected.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve CLEAN. Never paste private cache contents, usernames, secrets, or vulnerability details here. Use the Security policy for vulnerabilities.
+
+  - type: input
+    id: version
+    attributes:
+      label: CLEAN version
+      description: Run `clean --version`.
+      placeholder: clean 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: macos
+    attributes:
+      label: macOS and hardware
+      description: Include the macOS version and whether the Mac is Apple silicon or Intel.
+      placeholder: macOS 26.5, Apple M-series
+    validations:
+      required: true
+
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal
+      placeholder: Terminal.app, iTerm2, Ghostty, Warp, or another terminal
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened
+      description: Describe the smallest reproducible sequence, including the keys or read-only command used.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Redacted doctor output
+      description: Paste `clean doctor` output after removing personal path components.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Add screenshots or logs only after removing private paths and application data.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Safety checks
+      options:
+        - label: I searched existing issues for this behavior.
+          required: true
+        - label: I removed private paths, cache contents, and secrets from this report.
+          required: true
+        - label: This report does not disclose a security vulnerability.
+          required: true

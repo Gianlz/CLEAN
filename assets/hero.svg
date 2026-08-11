@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">CLEAN terminal interface preview</title>
+  <desc id="desc">A neon terminal window showing CLEAN's safety-first cache review screen.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050812"/>
+      <stop offset="0.55" stop-color="#0c1222"/>
+      <stop offset="1" stop-color="#150d2c"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#31e7ff"/>
+      <stop offset="0.5" stop-color="#aa5cff"/>
+      <stop offset="1" stop-color="#a6ff60"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="560" rx="28" fill="url(#background)"/>
+  <circle cx="1050" cy="70" r="180" fill="#aa5cff" opacity="0.08"/>
+  <circle cx="120" cy="490" r="210" fill="#31e7ff" opacity="0.06"/>
+  <rect x="55" y="42" width="1090" height="470" rx="18" fill="#080d1c" stroke="#273654" stroke-width="2"/>
+  <rect x="55" y="42" width="1090" height="46" rx="18" fill="#10182b"/>
+  <rect x="55" y="70" width="1090" height="18" fill="#10182b"/>
+  <circle cx="84" cy="65" r="7" fill="#ff5c82"/>
+  <circle cx="108" cy="65" r="7" fill="#ffc947"/>
+  <circle cx="132" cy="65" r="7" fill="#a6ff60"/>
+  <text x="600" y="70" fill="#70809a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" text-anchor="middle">clean — safety-first macOS cache review</text>
+  <text x="92" y="167" fill="url(#neon)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="78" font-weight="800" letter-spacing="11">CLEAN</text>
+  <text x="815" y="125" fill="#a6ff60" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">◆ SAFETY LOCKED</text>
+  <text x="815" y="151" fill="#70809a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">scope</text>
+  <text x="905" y="151" fill="#e2e8ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">USER CACHES</text>
+  <text x="815" y="176" fill="#70809a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">age</text>
+  <text x="905" y="176" fill="#ffc947" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">7+ DAYS</text>
+  <rect x="88" y="204" width="1024" height="50" rx="8" fill="#0c1222" stroke="#273654"/>
+  <rect x="112" y="219" width="74" height="20" rx="3" fill="#aa5cff"/>
+  <text x="149" y="234" fill="#050812" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" text-anchor="middle">FOUND</text>
+  <text x="204" y="234" fill="#e2e8ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">old cache candidates</text>
+  <rect x="638" y="219" width="92" height="20" rx="3" fill="#31e7ff"/>
+  <text x="684" y="234" fill="#050812" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" text-anchor="middle">SELECTED</text>
+  <text x="748" y="234" fill="#a6ff60" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">nothing by default</text>
+  <rect x="88" y="273" width="638" height="188" rx="10" fill="#0c1222" stroke="#273654"/>
+  <text x="110" y="303" fill="#31e7ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">CACHE GROUPS · SPACE TO SELECT</text>
+  <line x1="110" y1="315" x2="701" y2="315" stroke="#273654"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">
+    <text x="112" y="345" fill="#70809a">[ ]</text><text x="155" y="345" fill="#e2e8ff">Homebrew</text><text x="615" y="345" fill="#70809a">1.49 GB</text>
+    <text x="112" y="377" fill="#70809a">[ ]</text><text x="155" y="377" fill="#e2e8ff">Firefox</text><text x="625" y="377" fill="#70809a">936 MB</text>
+    <text x="112" y="409" fill="#a6ff60">[◆]</text><text x="155" y="409" fill="#050812" font-weight="700">Developer cache</text><rect x="145" y="389" width="556" height="28" rx="4" fill="#31e7ff" opacity="0.9"/><text x="155" y="409" fill="#050812" font-weight="700">Developer cache</text><text x="615" y="409" fill="#050812" font-weight="700">2.31 GB</text>
+    <text x="112" y="441" fill="#70809a">[ ]</text><text x="155" y="441" fill="#e2e8ff">Playwright</text><text x="615" y="441" fill="#70809a">1.10 GB</text>
+  </g>
+  <rect x="746" y="273" width="366" height="188" rx="10" fill="#0c1222" stroke="#273654"/>
+  <text x="770" y="303" fill="#31e7ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">INSPECTOR</text>
+  <line x1="770" y1="315" x2="1086" y2="315" stroke="#273654"/>
+  <text x="770" y="346" fill="#e2e8ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">Developer cache</text>
+  <text x="770" y="373" fill="#70809a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">estimated</text>
+  <text x="1018" y="373" fill="#a6ff60" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">2.31 GB</text>
+  <rect x="770" y="393" width="292" height="7" rx="3" fill="#273654"/>
+  <rect x="770" y="393" width="176" height="7" rx="3" fill="url(#neon)"/>
+  <text x="770" y="431" fill="#ffc947" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">UNCHANGED MANIFEST FILES ONLY</text>
+  <text x="600" y="492" fill="#70809a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" text-anchor="middle">↑↓ move   Space select   Enter review   ? safety guide   q quit</text>
+</svg>

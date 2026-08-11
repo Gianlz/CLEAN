@@ -1,0 +1,9 @@
+# Repository ownership
+* @Gianlz
+
+# Automation and security-sensitive deletion boundaries
+/.github/ @Gianlz
+/src/rules.rs @Gianlz
+/src/safety.rs @Gianlz
+/src/scanner.rs @Gianlz
+/src/cleaner.rs @Gianlz
