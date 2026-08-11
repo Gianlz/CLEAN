@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="assets/hero.svg" alt="CLEAN terminal interface" width="100%">
+  <img width="601" height="453" alt="image" src="https://github.com/user-attachments/assets/1be9eb35-8242-49ef-90f9-af45b5b04d1d" />
+
   <h1>CLEAN</h1>
   <p><strong>A beautiful cache cleaner that treats deletion like a security boundary.</strong></p>
   <p>
